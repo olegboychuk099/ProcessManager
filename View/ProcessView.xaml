@@ -7,9 +7,9 @@
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
         d:DesignHeight="450" d:DesignWidth="1400">
-    <Grid>
+    <Grid Background="#2C373E">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*" ></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -18,7 +18,7 @@
             <ColumnDefinition Width="5"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <DataGrid Grid.Row="0" SelectionMode="Single" SelectedItem="{Binding SelectedProcess}" Grid.Column="1" Name="ProcessesDataGrid" AutoGenerateColumns="False" ItemsSource="{Binding Processes, Mode=OneWay}">
+        <DataGrid RowBackground="#2C373E" Background="#2C373E" Grid.Row="0" SelectionMode="Single" SelectedItem="{Binding SelectedProcess}" Grid.Column="1" Name="ProcessesDataGrid" AutoGenerateColumns="False" ItemsSource="{Binding Processes, Mode=OneWay}">
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Modules" Command="{Binding GetModuleCommand}"/>
@@ -27,19 +27,18 @@
                 </ContextMenu>
             </DataGrid.ContextMenu>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Process Name" MaxWidth="200" IsReadOnly="True" Binding="{Binding Name}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Process ID" MaxWidth="155" IsReadOnly="True" Binding="{Binding Id}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Is Active" MaxWidth="155" IsReadOnly="True" Binding="{Binding IsActive}"></DataGridTextColumn>
-                <DataGridTextColumn Header="%, CPU" MaxWidth="155" IsReadOnly="True" Binding="{Binding Cpu}"></DataGridTextColumn>
-                <DataGridTextColumn Header="MB, RAM" MaxWidth="155" IsReadOnly="True" Binding="{Binding Ram}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Threads Created" MaxWidth="155" IsReadOnly="True" Binding="{Binding NumberOfThreads}"></DataGridTextColumn>
-                <DataGridTextColumn Header="User" MaxWidth="155" IsReadOnly="True" Binding="{Binding UserName}"></DataGridTextColumn>
-                <DataGridTextColumn Header="File Path" MaxWidth="550" IsReadOnly="True" Binding="{Binding Path}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Run On" MaxWidth="155" IsReadOnly="True" Binding="{Binding StartDate}"></DataGridTextColumn>
-                
+                <DataGridTextColumn Foreground="AliceBlue" Header="Process Name" MaxWidth="200" IsReadOnly="True" Binding="{Binding Name}"></DataGridTextColumn>
+                <DataGridTextColumn Foreground="AliceBlue" Header="Process ID" MaxWidth="155" IsReadOnly="True" Binding="{Binding Id}"></DataGridTextColumn>
+                <DataGridTextColumn Foreground="AliceBlue" Header="Is Active" MaxWidth="155" IsReadOnly="True" Binding="{Binding IsActive}"></DataGridTextColumn>
+                <DataGridTextColumn Foreground="AliceBlue" Header="%, CPU" MaxWidth="155" IsReadOnly="True" Binding="{Binding Cpu}"></DataGridTextColumn>
+                <DataGridTextColumn Foreground="AliceBlue" Header="Mb, RAM" MaxWidth="155" IsReadOnly="True" Binding="{Binding Ram}"></DataGridTextColumn>
+                <DataGridTextColumn Foreground="AliceBlue" Header="Threads Created" MaxWidth="155" IsReadOnly="True" Binding="{Binding NumberOfThreads}"></DataGridTextColumn>
+                <DataGridTextColumn Foreground="AliceBlue" Header="User" MaxWidth="155" IsReadOnly="True" Binding="{Binding UserName}"></DataGridTextColumn>
+                <DataGridTextColumn Foreground="AliceBlue" Header="File Path" MaxWidth="550" IsReadOnly="True" Binding="{Binding Path}"></DataGridTextColumn>
+                <DataGridTextColumn Foreground="AliceBlue" Header="Run On" MaxWidth="155" IsReadOnly="True" Binding="{Binding StartDate}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Grid.Row="1" Grid.Column="1" Content="EndTask" Margin="2" IsEnabled="{Binding IsItemSelected, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Command="{Binding EndTaskCommand}"></Button>
+        <Button Grid.Row="1" Grid.Column="1" Content="EndTask" Margin="20 20" FontSize="20" FontStyle="Italic" Background="Red" Foreground="AliceBlue" IsEnabled="{Binding IsItemSelected, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Command="{Binding EndTaskCommand}"></Button>
         <fa:ImageAwesome Grid.Row="0" Grid.ColumnSpan="3" Grid.Column="0" Icon="Refresh" Margin="20" Width="70"  Height="70" Spin="True" Visibility="{Binding LoaderVisibility, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></fa:ImageAwesome>
     </Grid>
 </UserControl>

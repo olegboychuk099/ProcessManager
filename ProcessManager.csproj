@@ -67,7 +67,7 @@
     <Compile Include="Model\MyProcess.cs" />
     <Compile Include="Tools\DelegateCommand.cs" />
     <Compile Include="Tools\LoaderManager.cs" />
-    <Compile Include="Tools\LoaderOwner.cs" />
+    <Compile Include="Tools\ILoaderOwner.cs" />
     <Compile Include="Tools\RelayCommand.cs" />
     <Compile Include="ViewModel\ModelsViewModel.cs" />
     <Compile Include="ViewModel\ProcessViewModel.cs" />

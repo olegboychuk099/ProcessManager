@@ -14,7 +14,7 @@ using ProcessManager.View;
 
 namespace ProcessManager.ViewModel
 {
-    internal class ProcessViewModel : INotifyPropertyChanged
+    internal class ProcessViewModel : INotifyPropertyChanged, ILoaderOwner
     {
         private ObservableCollection<MyProcess> _processes;
         private readonly Thread _updateThread;
@@ -27,6 +27,17 @@ namespace ProcessManager.ViewModel
         private ThreadView _threadView;
         private Visibility _loaderVisibility = Visibility.Hidden;
         public bool IsItemSelected => SelectedProcess != null;
+
+        private bool _isControlEnabled = true;
+        public bool IsControlEnabled
+        {
+            get { return _isControlEnabled; }
+            set
+            {
+                _isControlEnabled = value;
+                OnPropertyChanged();
+            }
+        }
 
         public MyProcess SelectedProcess
         {
@@ -51,6 +62,7 @@ namespace ProcessManager.ViewModel
 
         internal ProcessViewModel()
         {
+            LoaderManager.Instance.Initialize(this);
             _updateThread = new Thread(UpdateUsers);
             Thread initializationThread = new Thread(InitializeProcesses);
           
@@ -196,7 +208,7 @@ namespace ProcessManager.ViewModel
                         }
                     });
                 });
-                Thread.Sleep(4000);
+                Thread.Sleep(3000);
             }
         }
 
@@ -210,8 +222,11 @@ namespace ProcessManager.ViewModel
             }
         }
 
+       
+
         private async void InitializeProcesses()
         {
+            LoaderManager.Instance.ShowLoader();
             await Task.Run(() =>
             {
                 Processes = new ObservableCollection<MyProcess>(Tools.ProcessManager.Processes.Values);
@@ -219,7 +234,7 @@ namespace ProcessManager.ViewModel
             _updateThread.Start();
             while (Tools.ProcessManager.Processes.Count == 0)
                 Thread.Sleep(3000);
-
+            LoaderManager.Instance.HideLoader();
         }
 
         internal void Close()

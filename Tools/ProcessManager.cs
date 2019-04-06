@@ -10,7 +10,7 @@ namespace ProcessManager.Tools
 {
     internal static class ProcessManager
     {
-        private static readonly Thread UpdateDbThread;
+        private static readonly Thread UpdateThread;
         private static readonly Thread UpdateEntriesThread;
 
         internal static Dictionary<int, MyProcess> Processes { get; set; }
@@ -19,14 +19,14 @@ namespace ProcessManager.Tools
         {
             Processes = new Dictionary<int, MyProcess>();
             UpdateEntriesThread = new Thread(UpdateEntries);
-            UpdateDbThread = new Thread(UpdateDb);
-            UpdateDbThread.Start();
+            UpdateThread = new Thread(UpdateDb);
+            UpdateThread.Start();
             UpdateEntriesThread.Start();
         }
 
         internal static void Close()
         {
-            UpdateDbThread.Join(4000);
+            UpdateThread.Join(3000);
             UpdateEntriesThread.Join(1500);
         }
 
